@@ -177,33 +177,36 @@ Cada padrão tem exemplo completo, ressalva e explicação em [`SKILL.md`](SKILL
 
 ## Exemplo completo
 
-*Detalhes como o mês e o bairro precisam vir de quem escreveu. Se estiverem faltando, a skill deve perguntar em vez de inventar.*
+*Alegações sem apoio, como um superlativo continental atribuído a "especialistas", devem ser removidas, não substituídas por uma fonte inventada.*
 
 **Antes (com cara de IA):**
-> Passei um fim de semana inesquecível em Paraty, e deixa eu te contar — essa cidade literalmente roubou meu coração. Desde o momento em que cheguei, eu soube que estava em um lugar verdadeiramente especial.
+> Se você é apaixonado por comida, São Paulo vai literalmente roubar seu coração — e deixa eu te contar, não existe outra cidade no Brasil que ofereça uma experiência gastronômica tão rica e multifacetada quanto a capital paulista.
 >
-> Aninhada entre a Serra do Mar e o litoral sul fluminense, Paraty é um vibrante testemunho da herança colonial brasileira, onde história e natureza se entrelaçam a cada esquina. Sim, as pedras irregulares do calçamento são desafiadoras — meus tornozelos sentiram isso! — mas cada passo revela um cenário de tirar o fôlego que torna tudo válido.
+> A cena gastronômica paulistana é um vibrante testemunho da diversidade cultural do Brasil, refletindo décadas de imigração italiana, japonesa, árabe e nordestina que moldaram um panorama culinário único. Não é só uma questão de comer bem, é uma verdadeira imersão cultural que simboliza a alma cosmopolita da cidade.
 >
-> Nenhuma viagem estaria completa sem passear de barco pela Baía de Paraty, navegando entre as ilhas mais icônicas da região. E a comida? Simplesmente divina. A cachaça artesanal local é um tesouro nacional querido, e provar uma dose ainda fresca da destilaria foi um momento que nunca vou esquecer.
+> Bairros como a Liberdade, a Mooca e o Bixiga oferecem experiências autênticas, imperdíveis e inesquecíveis. Segundo especialistas em gastronomia, São Paulo concentra a maior diversidade de restaurantes étnicos da América Latina, com opções que vão desde o tradicional pastel de feira até o requintado kaiseki japonês.
 >
-> Mas o que realmente torna Paraty especial não é só a paisagem — é o sentimento. Ande alguns passos para fora do centro histórico e você vai descobrir um lado mais quieto e autêntico: becos ensolarados, fachadas coloniais charmosas e moradores simpáticos levando a vida no seu ritmo, convidando você a desacelerar e aproveitar cada momento.
+> Vale destacar que não é apenas sobre comer, é sobre viver uma experiência sensorial completa. 🍜 O detalhe que faz São Paulo ser especial: a cidade nunca dorme, e a comida de rua a qualquer hora do dia é prova viva disso.
 >
-> É claro, a imperdível Igreja de Santa Rita oferece vistas deslumbrantes sobre os telhados coloniais. As filas podem ser longas, mas a experiência vale cada minuto para qualquer amante de história.
+> Aqui estão alguns destaques que você não pode perder:
+> - **Mercadão:** um templo gastronômico com o icônico sanduíche de mortadela
+> - **Feira da Liberdade:** um mergulho na cultura oriental aos finais de semana
+> - **Vila Madalena:** boteco descontraído, cerveja artesanal e petiscos
 >
-> Eu voltaria? Com certeza. Paraty não é só um lugar para visitar — é um lugar para se apaixonar, de novo e de novo. Se você está sonhando com sua próxima escapada, esse é um destino que promete memórias para durar a vida toda. ✨
+> Apesar dos desafios típicos de uma metrópole, como o trânsito caótico e os preços elevados, São Paulo continua a prosperar como a capital gastronômica inquestionável do Brasil. Se você está planejando sua próxima viagem, esse é um destino que promete memórias inesquecíveis e sabores para durar a vida toda. Espero que esse guia ajude na sua jornada gastronômica! ✨
+
+**Padrões identificados:** 4 (linguagem de vendas: "vibrante", "imperdíveis, inesquecíveis", "alma cosmopolita"), 1 (importância inflada: "testemunho da diversidade cultural", "moldaram um panorama culinário único"), 3 (gerúndio raso: "refletindo décadas de imigração..."), 5 (fonte vaga: "segundo especialistas... maior diversidade... da América Latina"), 9 (não é só X, é Y, duas vezes), 10 (grupo forçado de três: "autênticas, imperdíveis e inesquecíveis"), 16 (lista com mini-título em negrito), 18 (emojis 🍜 e ✨), 28 (anunciar o próximo ponto: "aqui estão alguns destaques..."), 36 (revelação com dois-pontos: "o detalhe que faz São Paulo ser especial: a cidade nunca dorme"), 6 (desafios formulaicos: "apesar dos desafios típicos..., continua a prosperar"), 20 (sobra de chatbot: "Espero que esse guia ajude..."), 25 (final genérico: "memórias inesquecíveis... para durar a vida toda"), e a expressão vigiada "vale destacar que".
 
 **Depois:**
-> Passei um fim de semana em Paraty em outubro passado e ainda tenho sentimentos meio contraditórios sobre a viagem. Bonita, sim. Também mais dura para os tornozelos do que qualquer guia avisa.
+> São Paulo tem uma das cenas gastronômicas mais diversas do Brasil, moldada por mais de um século de imigração italiana, japonesa, árabe e nordestina. Isso aparece tanto na comida de rua quanto no cardápio dos restaurantes mais concorridos.
 >
-> O calçamento de pedra é praticamente o assunto principal da cidade e nunca aparece nos folhetos. Fiquei hospedado perto do centro histórico, que fica lindo nas fotos e, na prática, significa andar sobre pedras irregulares toda vez que eu queria um café. No segundo dia meus tornozelos já tinham opinião formada. Comecei a planejar cada caminhada em volta de qual trecho tinha o calçamento mais liso, o que é um jeito estranho de conhecer uma cidade, mas provavelmente o mais honesto.
+> Essa mistura fica mais visível em três bairros. A Liberdade abriga a maior comunidade japonesa fora do Japão e concentra lojas de doces, casas de lámen e a feira de fim de semana. A Mooca e o Bixiga guardam a herança italiana em restaurantes de família que ainda seguem receitas antigas. Cada bairro tem um sotaque próprio, do pastel de feira ao kaiseki.
 >
-> Todo mundo recomenda o passeio de barco pela baía, então fui, espremido entre o motor e um grupo de turistas filmando a mesma ilha havia uns vinte minutos. Da próxima vez eu alugaria uma canoa sozinho, ou iria antes das nove da manhã. A cachaça, porém, merece o alarde. Provei uma na própria destilaria, ainda quente do alambique, e por uns trinta segundos entendi por que gente monta viagem inteira em torno de uma garrafa.
+> O Mercadão Municipal é onde boa parte dos visitantes começa, por causa do sanduíche de mortadela, generoso e simples, que virou tão símbolo da cidade quanto qualquer prato mais elaborado. Na Feira da Liberdade, o destaque de fim de semana é a comida de rua japonesa. Na Vila Madalena, os botecos ficam abertos até tarde, com petisco e cerveja artesanal para quem prefere passar a noite ali em vez de num museu.
 >
-> O que eu não esperava era como a cidade fica quieta longe do calçamento principal. Duas ruas para dentro de qualquer praça vira varal de roupa, janela aberta, gente de cadeira na porta vendo o movimento passar. É essa Paraty que eu ainda penso, não a igreja do cartão-postal.
->
-> A igreja é boa. A vista é ótima, a fila é longa, e passei mais tempo esperando para entrar do que olhando alguma coisa lá dentro. Se eu tivesse só dois dias, trocaria por uma tarde de me perder pelas ruas de trás.
->
-> Eu voltaria, mas em maio e com um calçado melhor. Paraty não facilita nada para quem visita. Acho que gostei disso, mesmo com meus tornozelos discordando.
+> O trânsito é ruim e os preços em bairros badalados não são baixos, mas isso não costuma afastar quem já decidiu vir para comer.
+
+**O que mudou:** cortamos toda alegação sem apoio ("maior diversidade da América Latina", "especialistas em gastronomia") em vez de inventar uma fonte para ela. Trocamos a lista de marcadores em negrito por prosa, tiramos os emojis, o "aqui estão os destaques" e a despedida de chatbot, e terminamos no fato concreto (trânsito e preço) em vez do final genérico de "memórias para durar a vida toda". Todo bairro, prato e fato original foi mantido: nada foi inventado, só reduzido ao que é verificável ou de conhecimento comum (Mercadão, Liberdade como maior comunidade japonesa fora do Japão, Mooca e Bixiga como bairros italianos, Vila Madalena como polo de bar).
 
 ## De onde isso vem
 
