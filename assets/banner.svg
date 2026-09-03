@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1280" height="320" viewBox="0 0 1280 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Humanize BR: tire o sotaque de robô do seu texto">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06170f"/>
+      <stop offset="55%" stop-color="#0b2c1c"/>
+      <stop offset="100%" stop-color="#123a24"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2ee6a6"/>
+      <stop offset="100%" stop-color="#ffd400"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="320" fill="url(#bg)"/>
+  <rect width="1280" height="320" fill="none" stroke="#1c4a30" stroke-width="2"/>
+
+  <rect x="0" y="0" width="10" height="320" fill="url(#accent)"/>
+
+  <text x="56" y="88" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="52" font-weight="700" fill="#f4fff9">Humanize BR</text>
+  <text x="56" y="124" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="21" fill="#8fe3bd">Tire o sotaque de robô do seu texto. Escreva com IA, publique como você.</text>
+
+  <g font-family="Consolas, Menlo, monospace" font-size="18">
+    <text x="56" y="182" fill="#ff8fa3" text-decoration="line-through">É importante ressaltar que esta ferramenta representa um divisor de águas,</text>
+    <text x="56" y="210" fill="#ff8fa3" text-decoration="line-through">simbolizando um marco crucial na jornada de qualquer criador de conteúdo.</text>
+    <text x="56" y="252" fill="#2ee6a6">Essa ferramenta tira os vícios de IA do texto antes de você publicar.</text>
+  </g>
+
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="16" fill="#8fe3bd">
+    <text x="56" y="296">38 padrões</text>
+    <text x="196" y="296">humanizer + no ai slop, em pt-BR</text>
+    <text x="1060" y="296" text-anchor="end" fill="#5fae86">MIT · Esl1h/humanize-br</text>
+  </g>
+</svg>

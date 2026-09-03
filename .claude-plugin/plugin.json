@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "humanize-br",
+  "description": "Reescreve texto com cara de IA para soar como uma pessoa de verdade, em português.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Esl1h",
+    "url": "https://github.com/Esl1h"
+  },
+  "homepage": "https://github.com/Esl1h/humanize-br",
+  "repository": "https://github.com/Esl1h/humanize-br",
+  "license": "MIT",
+  "keywords": ["writing", "editing", "ai-detection", "humanize", "portugues", "prose", "style"],
+  "skills": ["./"]
+}

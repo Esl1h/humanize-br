@@ -1,0 +1,40 @@
+{
+  "name": "humanize-br",
+  "version": "1.0.0",
+  "description": "Remove o sotaque de robô do texto em português, sem achatar a voz de quem escreveu.",
+  "author": {
+    "name": "Esl1h",
+    "url": "https://github.com/Esl1h"
+  },
+  "homepage": "https://github.com/Esl1h/humanize-br",
+  "repository": "https://github.com/Esl1h/humanize-br",
+  "license": "MIT",
+  "keywords": [
+    "writing",
+    "editing",
+    "voice",
+    "portugues",
+    "ai slop"
+  ],
+  "skills": "./",
+  "interface": {
+    "displayName": "Humanize BR",
+    "shortDescription": "Remove clichês de IA do texto em português",
+    "longDescription": "Humanize BR reescreve texto com cara de IA para soar como uma pessoa de verdade escreveu, sem achatar o estilo de quem escreveu e sem mudar o que o texto diz. É a fusão, traduzida e adaptada para o português do Brasil, de duas skills em inglês: Humanizer e No AI Slop. Alguns dos 38 padrões que ela remove:\n\nContrastes binários forçados: “Não é X. É Y.”\n\nAberturas de falsa sinceridade: “Sinceramente? Depende...”\n\nPalavras de IA superusadas: “ademais”, “panorama”, “sinergia”, “protagonismo”\n\nRevelações com dois-pontos: “o detalhe que faz tudo funcionar: ...”\n\nFinais genéricos: “o futuro é promissor para a empresa”\n\n...e muito mais, com ressalvas específicas para travessão, aspas e anglicismos em português.\n\nUse para editar um texto e remover o sotaque de robô, ou para detectar padrões de IA num texto sem reescrevê-lo. Se gostar da skill, deixe uma estrela no GitHub: https://github.com/Esl1h/humanize-br",
+    "developerName": "Esl1h",
+    "category": "Productivity",
+    "capabilities": [
+      "Editar",
+      "Detectar",
+      "Preservar voz"
+    ],
+    "websiteURL": "https://github.com/Esl1h/humanize-br",
+    "privacyPolicyURL": "https://github.com/Esl1h/humanize-br/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/Esl1h/humanize-br/blob/main/TERMS.md",
+    "defaultPrompt": [
+      "(texto)",
+      "é isso IA? (texto)"
+    ],
+    "brandColor": "#00923F"
+  }
+}

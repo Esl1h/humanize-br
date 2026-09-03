@@ -1,0 +1,4 @@
+interface:
+  display_name: "/humanize-br"
+  short_description: "Remove o sotaque de robô do texto em português, preservando a voz de quem escreveu."
+  default_prompt: "Use $humanize-br para remover padrões de IA deste texto, preservando minha voz pessoal."

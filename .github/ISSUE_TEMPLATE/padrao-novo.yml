@@ -1,0 +1,27 @@
+name: Padrão de IA não coberto
+description: Aponte um padrão de texto com cara de IA em português que a skill ainda não pega.
+title: "[padrão] "
+labels: ["padrão novo"]
+body:
+  - type: textarea
+    id: trecho
+    attributes:
+      label: Trecho de exemplo
+      description: Cole um trecho real (pode anonimizar nomes) que mostra o problema.
+      placeholder: "Ademais, este projeto representa um divisor de águas..."
+    validations:
+      required: true
+  - type: textarea
+    id: problema
+    attributes:
+      label: Qual é o padrão?
+      description: Descreva o que soa artificial nesse trecho e, se puder, como você reescreveria.
+    validations:
+      required: true
+  - type: input
+    id: relacionado
+    attributes:
+      label: Padrão relacionado (opcional)
+      description: Se isso for parecido com algum dos 38 padrões do SKILL.md, cite o número.
+    validations:
+      required: false

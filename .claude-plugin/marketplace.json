@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace-manifest.json",
+  "name": "humanize-br",
+  "owner": {
+    "name": "Esl1h",
+    "url": "https://github.com/Esl1h"
+  },
+  "description": "Instale o Humanize BR como plugin do Claude Code.",
+  "plugins": [
+    {
+      "name": "humanize-br",
+      "source": "./",
+      "description": "Reescreve texto com cara de IA para soar como uma pessoa de verdade, em português.",
+      "license": "MIT",
+      "keywords": ["writing", "editing", "ai-detection", "humanize", "portugues", "prose", "style"]
+    }
+  ]
+}

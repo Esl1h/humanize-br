@@ -1,0 +1,26 @@
+name: Falso positivo
+description: Um padrão sinalizou algo que não deveria ter sido sinalizado.
+title: "[falso positivo] "
+labels: ["falso positivo"]
+body:
+  - type: input
+    id: padrao
+    attributes:
+      label: Número do padrão
+      description: Qual dos 38 padrões do SKILL.md sinalizou errado?
+    validations:
+      required: true
+  - type: textarea
+    id: trecho
+    attributes:
+      label: Trecho sinalizado
+      description: Cole o trecho que foi marcado como cara de IA sem ser.
+    validations:
+      required: true
+  - type: textarea
+    id: motivo
+    attributes:
+      label: Por que isso não é sinal de IA?
+      description: Explique o contexto que torna esse trecho legítimo.
+    validations:
+      required: true
