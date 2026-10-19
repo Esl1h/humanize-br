@@ -22,18 +22,20 @@ Para pedidos de detecção, confira se a resposta nomeia cada padrão encontrado
 
 1. As palavras banidas, frases de preenchimento, advérbios costumeiramente vazios e alegações infladas foram removidos, a não ser quando citados como exemplo?
 
-## Os 38 padrões
+## Os 41 padrões
 
-1. Contrastes binários, listagem negativa, aberturas retóricas e introduções que só atrasam o ponto foram removidos?
-2. Falsos insights, revelações com dois-pontos, análise rasa com gerúndio, verbos fracos como "servir como", troca de sinônimos, fragmentos dramáticos e ritmo robótico foram corrigidos?
-3. Importância inflada e fontes vagas foram trocadas por fatos simples e fontes nomeadas, ou sinalizadas para quem pediu a edição quando não existe fonte?
-4. O metadiscurso interpretativo foi removido, incluindo comentário sobre o próprio texto, orientação à leitora, marcadores de ênfase e paráfrase redundante?
+1. Contrastes binários, listagem negativa, encenações retóricas, anúncios do próximo ponto e aberturas de falsa sinceridade foram removidos?
+2. Encenações de falso insight, revelações com dois-pontos, análise rasa com gerúndio, verbos fracos como "servir como", troca de sinônimos, fragmentos dramáticos e ritmo robótico foram corrigidos?
+3. Importância inflada, linguagem de vendas, conexão vaga e fontes vagas foram trocadas por fatos simples, relações nomeadas e fontes nomeadas, ou sinalizadas para quem pediu a edição quando não existe fonte?
+4. Escrever sobre o documento em vez do assunto e o metadiscurso interpretativo foram removidos, incluindo narrativa de método, comentário sobre o próprio texto, orientação à leitora, marcadores de ênfase e paráfrase redundante?
 5. As frases de falsa profundidade no fim do texto foram apagadas em vez de reescritas como metáfora melhor?
-6. Os finais de recapitulação foram cortados, para o texto terminar num ponto concreto, numa conclusão útil ou numa próxima ação?
-7. O slop de formatação foi removido: emoji em título, negrito decorativo, marcadores que deveriam ser prosa, cabeçalhos para seções minúsculas?
-8. As aspas seguem um padrão único e consistente no documento inteiro (veja o padrão 19, que não trata aspas curvas como indício de IA)?
-9. O travessão aparece raramente em prosa expositiva (normalmente nenhum em texto curto, no máximo um ou dois em textos longos quando claramente ajudam), preservando o travessão de fala em diálogos de ficção?
-10. Anglicismos hifenizados sem necessidade (data-driven, customer-centric, cutting-edge) foram trocados por equivalentes naturais em português, mantendo apenas o vocabulário técnico sem tradução consagrada?
+6. Os finais genéricos e de recapitulação foram cortados, para o texto terminar num ponto concreto, numa conclusão útil ou numa próxima ação?
+7. Sobras de chatbot, ressalvas de limite de conhecimento, chutes disfarçados e aberturas condescendentes sumiram, e respostas que re-explicam contexto compartilhado começam pela decisão?
+8. O slop de formatação foi removido: emoji e símbolos decorativos em título, negrito decorativo, mini-títulos em negrito, capitalização de título no estilo inglês, marcadores que deveriam ser prosa, cabeçalhos para seções minúsculas?
+9. Os dois-pontos são seguidos de minúscula, salvo quando a gramática, um nome próprio, um título ou código pedirem o contrário?
+10. O travessão aparece raramente em prosa expositiva (normalmente nenhum em texto curto, no máximo um ou dois em textos longos quando claramente ajudam), preservando o travessão de fala em diálogos de ficção?
+11. As aspas seguem um padrão único e consistente no documento inteiro (veja o padrão 20, que não trata aspas curvas como indício de IA)?
+12. Anglicismos hifenizados sem necessidade (data-driven, customer-centric, cutting-edge) foram trocados por equivalentes naturais em português, mantendo apenas o vocabulário técnico sem tradução consagrada?
 
 ## Leitura final
 
@@ -42,3 +44,4 @@ Para pedidos de detecção, confira se a resposta nomeia cada padrão encontrado
 3. O texto soaria natural se lido em voz alta para uma colega atenta?
 4. O resultado final inclui o texto editado completo e uma seção curta **O que mudou**?
 5. Para pedidos de detecção, a resposta nomeia cada padrão com o trecho exato entre aspas e um ajuste curto, sem reescrever, sem dar nota e sem afirmar autoria de IA?
+6. No modo arquivo, quando o scanner embutido estiver disponível, `scripts/slop_scan.py` não acusa nada no arquivo reescrito?

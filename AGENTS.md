@@ -10,8 +10,10 @@ Mantenha a skill portátil. Não escreva instruções que a limitem a uma ou dua
 
 ## Arquivos principais
 
-- `SKILL.md` é a fonte da verdade e o único arquivo de skill do repositório. Contém metadados YAML portáveis, 38 padrões numerados, seus exemplos e o processo de reescrita.
+- `SKILL.md` é a fonte da verdade e o único arquivo de skill do repositório. Contém metadados YAML portáveis, 41 padrões numerados, seus exemplos e o processo de reescrita.
 - `eval.md` contém a lista de autoverificação que a skill roda sobre o próprio trabalho antes de devolver o resultado.
+- `scripts/slop_scan.py` escaneia texto atrás dos padrões mecânicos (palavras banidas, travessões, títulos decorados, aspas misturadas) e lê as listas de palavras do `SKILL.md`.
+- `evals/` traz textos de prova com padrões plantados, reescritas de referência, um avaliador (`run_evals.py`) e prompts de avaliação para agentes (`evals.json`).
 - `README.md` explica instalação, uso, padrões e histórico de versões.
 - `.claude-plugin/plugin.json` descreve o plugin do Claude Code e aponta o carregador de skill para o `SKILL.md` na raiz.
 - `.claude-plugin/marketplace.json` permite adicionar este repositório como marketplace do Claude.
@@ -24,12 +26,12 @@ Mantenha a skill portátil. Não escreva instruções que a limitem a uma ou dua
 
 Mantenha `SKILL.md`, `eval.md` e `README.md` sincronizados.
 
-- **Padrões:** a skill tem 38 padrões numerados, organizados em oito categorias. Ao adicionar, remover ou renumerar um padrão, atualize a tabela do README, o título da seção, o validador e toda referência ao número do padrão.
+- **Padrões:** a skill tem 41 padrões numerados, organizados em sete categorias. Ao adicionar, remover ou renumerar um padrão, atualize a tabela do README, o índice de padrões no `SKILL.md`, o validador, os números de padrão relatados por `scripts/slop_scan.py` e toda referência ao número do padrão.
 - **Versão:** mantenha a mesma versão em `SKILL.md`, em `metadata.version`, na primeira entrada de versão do README, em `.claude-plugin/plugin.json` e em `.codex-plugin/plugin.json`. Não acrescente um campo `version` de nível superior na skill.
 - **Compatibilidade:** mantenha as instruções de instalação e uso neutras entre agentes. Nomes como Claude Code, ChatGPT e Codex são exemplos, não limitações.
 - **Histórico:** acrescente uma nota curta de versão no README para toda mudança de comportamento ou correção não óbvia.
 - **Localização:** ao adaptar um padrão do inglês, não traduza ao pé da letra. Verifique se o fenômeno realmente ocorre em português (travessão, aspas e hifenização têm convenções diferentes do inglês) e ajuste o exemplo e a ressalva de acordo. Veja os padrões 14, 19 e 26 no `SKILL.md` como referência desse cuidado.
-- **Verificações:** antes de publicar, rode `python3 scripts/validate-package.py`.
+- **Verificações:** antes de publicar, rode `python3 scripts/validate-package.py` e `python3 evals/run_evals.py`.
 
 ## Estilo de escrita
 

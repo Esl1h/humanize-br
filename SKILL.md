@@ -5,25 +5,29 @@ description: |
   escreveu, sem mudar o que foi dito, ou aponta cada indício de IA sem
   reescrever nada. Use ao editar ou revisar textos em português com clichês de
   IA, discurso de vendas, fontes vagas, estrutura repetitiva, palavras
-  batidas, voz passiva, preenchimento ou sobras de chatbot. Baseado nos 35
-  padrões de "Signs of AI writing" da Wikipédia e nos padrões do projeto No AI
-  Slop, adaptados para o português do Brasil.
+  batidas, voz passiva, preenchimento ou sobras de chatbot. Baseado nos
+  padrões de "Signs of AI writing" da Wikipédia e nos do projeto No AI Slop,
+  adaptados para o português do Brasil.
 license: MIT
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Humanize BR: elimine o sotaque de robô do seu texto
 
 Reescreva texto com cara de IA para soar como quem escreveu de verdade, não um chatbot. Não mude o que o texto diz nem invente detalhes.
 
-Os padrões abaixo vêm de duas fontes em inglês, adaptadas para o português: a lista ["Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) da Wikipédia, mantida pela WikiProject AI Cleanup, e os padrões do projeto [No AI Slop](https://github.com/petergyang/no-ai-slop), de Peter Yang. Nenhuma tradução literal resolve sozinha: um texto gerado por IA em português tem vícios próprios (calões, travessões, anglicismos, aspas), então cada padrão foi reescrito com exemplos e ressalvas para o nosso idioma.
+Os padrões abaixo vêm de duas fontes em inglês, adaptadas para o português: a lista ["Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) da Wikipédia, mantida pela WikiProject AI Cleanup, e os padrões do projeto [No AI Slop](https://github.com/petergyang/no-ai-slop), de Peter Yang. Nenhuma tradução literal resolve sozinha: um texto gerado por IA em português tem vícios próprios (calões, travessões, anglicismos, aspas), então cada padrão foi reescrito com exemplos e ressalvas para o nosso idioma. Revisões posteriores do Humanizer contribuíram os padrões 6 e 24 e as formas ampliadas dos padrões 32 e 40; esta skill mantém a numeração própria por tema.
 
 ## Os dois modos
 
 **Editar (padrão).** A pessoa envia um texto para corrigir. Faça a menor edição eficaz seguindo as regras abaixo e devolva o texto editado mais uma seção **O que mudou**.
 
-**Detectar.** A pessoa pergunta se um texto tem cara de IA, ou pede para auditar, escanear ou apontar problemas sem reescrever. Nomeie cada padrão desta skill que aparece, cite o trecho exato e sugira o ajuste em poucas palavras. Não reescreva, não dê nota ao texto e não afirme quem o escreveu. Detectores de IA chutam; padrões nomeados são evidência que a pessoa pode conferir com os próprios olhos. Ofereça a edição depois de mostrar os achados.
+**Detectar.** A pessoa pergunta se um texto tem cara de IA, ou pede para auditar, escanear ou apontar problemas sem reescrever. Nomeie cada padrão desta skill que aparece, cite o trecho exato e sugira o ajuste em poucas palavras, um achado por linha na ordem do texto:
+
+- **Padrão N (nome):** "trecho exato" → o ajuste em poucas palavras
+
+Não reescreva, não dê nota ao texto e não afirme quem o escreveu. Detectores de IA chutam; padrões nomeados são evidência que a pessoa pode conferir com os próprios olhos. Quando o texto estiver num arquivo e o scanner embutido estiver disponível, rode `python3 scripts/slop_scan.py <caminho>` primeiro: ele lista os achados mecânicos (palavras banidas, travessões, títulos decorados, aspas misturadas, listas com rótulo em negrito) com o número do padrão, e você acrescenta só os padrões retóricos. Sem o scanner instalado, faça essas checagens à mão. Ofereça a edição depois de mostrar os achados.
 
 ## O que fazer
 
@@ -36,6 +40,14 @@ Ao receber um texto para humanizar:
 
 O tipo de entrada define o que você devolve. Veja [Como devolver o resultado](#como-devolver-o-resultado). Use o mesmo processo de reescrita em qualquer modo.
 
+## O que perguntar
+
+Se a pessoa não tiver enviado um rascunho, peça que cole o texto.
+
+Se o público ou o formato estiver em dúvida e a resposta mudaria a edição, faça uma pergunta só: para quem é este texto e onde ele será publicado? Caso contrário, edite partindo da leitura mais provável e diga qual escolheu.
+
+Se uma frase precisar de um fato que o rascunho não contém, pergunte por ele em vez de inventar.
+
 ## Combine com a voz de quem escreve
 
 Se a pessoa enviar uma amostra da própria escrita, analise antes de reescrever:
@@ -44,7 +56,7 @@ Se a pessoa enviar uma amostra da própria escrita, analise antes de reescrever:
 2. Reproduza esses hábitos. Não troque palavras informais por formais nem apague cacoetes deliberados.
 3. Sem amostra, use a orientação abaixo.
 
-Uma amostra de escrita tem prioridade sobre estas regras de estilo. Se a amostra usa travessões com frequência, mantenha a mesma proporção. Não trate o padrão 14 como proibição automática.
+Uma amostra de escrita tem prioridade sobre estas regras de estilo. Se a amostra usa travessões com frequência, mantenha a mesma proporção. Não trate o padrão 15 como proibição automática.
 
 ## Dê personalidade só quando fizer sentido
 
@@ -81,6 +93,18 @@ Banidas de cara: mergulhar (no sentido de "delve"), fomentar, alavancar, viabili
 Advérbios costumeiramente vazios: apenas, literalmente (fora do sentido literal), sinceramente, honestamente, simplesmente, verdadeiramente, fundamentalmente, importantemente, crucialmente, inerentemente, inevitavelmente. Corte quando não acrescentam nada. Mantenha quando carregam ênfase, incerteza, contraste ou o ritmo natural de fala de quem escreveu.
 
 Frases costumeiramente vazias: vale ressaltar que, é importante notar que, cabe destacar que, no final das contas, quando se trata de, no fundo, no mundo de hoje, na era de, no universo de, a real é que, a verdade é que, em termos de, no que diz respeito a, a fim de, daqui para frente, neste artigo, vamos mergulhar nisso, vamos explorar. Corte quando atrasam o ponto. Mantenha uma frase ocasional quando fizer parte da voz reconhecível de quem escreveu e a frase ainda merecer seu lugar.
+
+## Índice de padrões
+
+O catálogo num relance, agrupado por categoria. Use-o para achar um padrão pelo número ao revisar um texto, em vez de reler o catálogo inteiro.
+
+**Conteúdo:** 1 importância inflada, 2 citação de nomes, 3 gerúndio raso, 4 linguagem de vendas, 5 fontes vagas, 6 conexão vaga, 7 seções formulaicas
+**Linguagem e gramática:** 8 palavras superusadas, 9 evitar ser/estar/ter, 10 contrastes binários, 11 grupos de três, 12 troca de nomes, 13 falsos intervalos, 14 voz passiva
+**Formatação:** 15 travessões, 16 negrito excessivo, 17 listas com rótulo em negrito, 18 capitalização de títulos, 19 emojis decorativos, 20 consistência de aspas
+**Chatbot:** 21 sobras de chatbot, 22 chutes disfarçados, 23 tom condescendente, 24 re-explicar contexto
+**Preenchimento e finais:** 25 frases de preenchimento, 26 qualificadores empilhados, 27 finais genéricos
+**Anglicismos:** 28 jargão hifenizado
+**Retórica de falsa profundidade:** 29 verdade mais profunda, 30 anunciar o ponto, 31 título repetido, 32 escrever sobre o documento, 33 punchlines forçadas, 34 ditados formulaicos, 35 falsa sinceridade, 36 objeções fantasma, 37 alternativas falsas, 38 revelações com dois-pontos, 39 metadiscurso, 40 slop de formatação, 41 falso insight
 
 ## Padrões de texto com cheiro de IA
 
@@ -150,7 +174,19 @@ Se a fonte explicar o que a pessoa disse e onde, mantenha essa citação útil. 
 
 Cite uma fonte real quando o texto original tiver uma. Caso contrário, remova a alegação sem apoio. Nunca invente uma fonte.
 
-#### 6. Seções formulaicas de "desafios e perspectivas"
+#### 6. Conexão vaga ou associação imprecisa
+
+**Palavras vigiadas:** associado a, em associação com, ligado a, em conexão com, atrelado a, com vínculos com
+
+**Problema:** texto de IA costuma dizer que duas coisas estão conectadas sem dizer como. "Ela é associada ao coletivo" esconde se fundou, coordena ou apenas acompanha. Nomeie a relação que a fonte informa. Se a fonte não disser como, mantenha a frase vaga em vez de inventar um papel.
+
+**Antes:**
+> Ela é associada ao coletivo Maré de Letras, que fundou e coordena. As oficinas foram realizadas em conexão com o programa de leitura da prefeitura.
+
+**Depois:**
+> Ela fundou e coordena o coletivo Maré de Letras. As oficinas fizeram parte do programa de leitura da prefeitura.
+
+#### 7. Seções formulaicas de "desafios e perspectivas"
 
 **Palavras vigiadas:** apesar de seus desafios..., apesar de enfrentar dificuldades típicas de..., desafios e legado, perspectivas futuras, segue prosperando
 
@@ -166,7 +202,7 @@ Acrescente detalhes como datas ou ações públicas só quando vierem da fonte o
 
 ### Padrões de linguagem e gramática
 
-#### 7. Palavras de IA superusadas
+#### 8. Palavras de IA superusadas
 
 **Palavras de alta frequência em IA:** ademais, outrossim, no cenário atual, panorama (em sentido abstrato), mergulhar (delve), robusto, essencial, crucial, primordial, fundamental (empilhados na mesma frase), sinergia, holístico, tapeçaria (metafórico), testemunho, sublinha/reforça (verbo), intrincado, multifacetado, jornada (metafórico), protagonismo, empoderar, fomentar, viabilizar, alavancar, engajamento, expertise, insights, disruptivo, corroborar, concomitantemente
 
@@ -178,7 +214,7 @@ Acrescente detalhes como datas ou ações públicas só quando vierem da fonte o
 **Depois:**
 > A culinária baiana também usa muito azeite de dendê, herança da culinária africana que chegou com o povo escravizado trazido para a Bahia.
 
-#### 8. Evitar "ser", "estar" e "ter"
+#### 9. Evitar "ser", "estar" e "ter"
 
 **Palavras vigiadas:** serve como, atua como, funciona como, representa, conta com, ostenta, apresenta
 
@@ -190,7 +226,7 @@ Acrescente detalhes como datas ou ações públicas só quando vierem da fonte o
 **Depois:**
 > O espaço é a área de exposições da galeria, tem 300 metros quadrados e pé-direito duplo.
 
-#### 9. "Não é só X, é Y" e contrastes binários forçados
+#### 10. "Não é só X, é Y" e contrastes binários forçados
 
 **Problema:** texto de IA abusa de formas como "não é só sobre X, é sobre Y" e "a questão não é X, é Y", dentro da frase ou como duas frases separadas.
 
@@ -206,7 +242,7 @@ Acrescente detalhes como datas ou ações públicas só quando vierem da fonte o
 **Depois:**
 > A avaliação importa mais do que o modelo.
 
-#### 10. Grupos forçados de três
+#### 11. Grupos forçados de três
 
 **Problema:** texto de IA costuma empurrar ideias para grupos de três só para parecer completo.
 
@@ -216,7 +252,7 @@ Acrescente detalhes como datas ou ações públicas só quando vierem da fonte o
 **Depois:**
 > O evento tem palestras e mesas redondas, além de um tempo livre para conversar entre uma sessão e outra.
 
-#### 11. Trocar nomes e repetir o início das frases
+#### 12. Trocar nomes e repetir o início das frases
 
 **Problema:** texto de IA trata a repetição por regra, não por ouvido. Pode ficar renomeando a mesma pessoa ou coisa. Também pode começar várias frases pelo mesmo sujeito, quase sempre "ela" ou "ele".
 
@@ -236,7 +272,7 @@ Use um nome claro para o mesmo sujeito. Para aberturas repetidas, junte as frase
 
 Não proíba a palavra repetida. Corrija o padrão de frase repetida. A frase que sobrar ainda pode começar com "Ela".
 
-#### 12. Falsos intervalos "de X a Y"
+#### 13. Falsos intervalos "de X a Y"
 
 **Problema:** texto de IA costuma usar "de X a Y" quando X e Y não formam um intervalo de verdade.
 
@@ -246,7 +282,7 @@ Não proíba a palavra repetida. Corrija o padrão de frase repetida. A frase qu
 **Depois:**
 > O livro aborda o Big Bang, a formação das estrelas e as teorias atuais sobre a matéria escura.
 
-#### 13. Voz passiva e sujeito oculto
+#### 14. Voz passiva e sujeito oculto
 
 **Problema:** texto de IA costuma esconder quem age ou apagar o sujeito. Use a voz ativa quando isso deixar o agente e a ação mais claros.
 
@@ -258,7 +294,7 @@ Não proíba a palavra repetida. Corrija o padrão de frase repetida. A frase qu
 
 ### Padrões visuais e de formatação
 
-#### 14. Travessões em excesso
+#### 15. Travessões em excesso
 
 **Regra:** a versão final não deve usar travessão (—) como muleta de ritmo em prosa expositiva, a não ser que a amostra de quem escreve já use bastante. Troque por ponto, vírgula, dois-pontos ou parênteses, ou reescreva a frase. Vale também para travessão espaçado ( — ) e para hífen duplo (--) usado como travessão.
 
@@ -272,7 +308,7 @@ Não proíba a palavra repetida. Corrija o padrão de frase repetida. A frase qu
 
 Antes de devolver a reescrita, procure por "—" e "–". Remova cada um, a não ser que a amostra de quem escreve use essa marca. Nesse caso, mantenha a mesma proporção da amostra.
 
-#### 15. Excesso de negrito
+#### 16. Excesso de negrito
 
 **Problema:** chatbots de IA costumam colocar palavras e frases em negrito sem motivo claro.
 
@@ -282,7 +318,7 @@ Antes de devolver a reescrita, procure por "—" e "–". Remova cada um, a não
 **Depois:**
 > O modelo combina OKRs, KPIs e ferramentas visuais como o Business Model Canvas.
 
-#### 16. Listas com mini-títulos em negrito
+#### 17. Listas com mini-títulos em negrito
 
 **Problema:** texto de IA costuma usar listas verticais em que todo item começa com um rótulo em negrito seguido de dois-pontos.
 
@@ -294,7 +330,7 @@ Antes de devolver a reescrita, procure por "—" e "–". Remova cada um, a não
 **Depois:**
 > A atualização melhora a interface, deixa o carregamento mais rápido graças a algoritmos mais eficientes, e acrescenta criptografia de ponta a ponta.
 
-#### 17. Capitalização indevida em títulos
+#### 18. Capitalização indevida em títulos
 
 **Problema:** chatbots de IA às vezes capitalizam Toda Palavra Principal De Um Título, um hábito importado do inglês que não é a convenção do português.
 
@@ -304,7 +340,7 @@ Antes de devolver a reescrita, procure por "—" e "–". Remova cada um, a não
 **Depois:**
 > ## Negociações estratégicas e parcerias globais
 
-#### 18. Emojis decorativos
+#### 19. Emojis decorativos
 
 **Problema:** chatbots de IA costumam acrescentar emojis a títulos e itens de lista como decoração.
 
@@ -316,7 +352,7 @@ Antes de devolver a reescrita, procure por "—" e "–". Remova cada um, a não
 **Depois:**
 > O produto estreia no terceiro trimestre. A pesquisa com usuários mostrou preferência por simplicidade. Próximo passo: agendar uma reunião de acompanhamento.
 
-#### 19. Consistência de aspas
+#### 20. Consistência de aspas
 
 **Importante:** diferente do inglês, no português as aspas curvas (" ") são o padrão tipográfico correto em texto formal, não um indício de IA. Não troque aspas curvas por aspas retas só por costume herdado do inglês.
 
@@ -332,7 +368,7 @@ Escolha um padrão de aspas para o documento inteiro e mantenha-o.
 
 ### Padrões de chatbot
 
-#### 20. Sobras de texto de chatbot na resposta
+#### 21. Sobras de texto de chatbot na resposta
 
 **Palavras vigiadas:** espero que isso ajude, claro!, com certeza!, você está certíssimo!, quer que eu..., posso continuar?, me avise se, aqui está um(a)...
 
@@ -344,7 +380,7 @@ Escolha um padrão de aspas para o documento inteiro e mantenha-o.
 **Depois:**
 > A Revolução Francesa começou em 1789, quando a crise financeira e a escassez de alimentos provocaram uma onda de revoltas.
 
-#### 21. Ressalvas de limite de conhecimento e chutes disfarçados
+#### 22. Ressalvas de limite de conhecimento e chutes disfarçados
 
 **Palavras vigiadas:** até [data], de acordo com as informações disponíveis, embora detalhes específicos sejam escassos..., não é de conhecimento público, prefere manter a vida pessoal em sigilo, provavelmente [cresceu/estudou/começou], acredita-se que
 
@@ -362,7 +398,7 @@ Escolha um padrão de aspas para o documento inteiro e mantenha-o.
 **Depois:**
 > A vida pregressa dela não está documentada nas fontes disponíveis. (Ou omita a seção.)
 
-#### 22. Tom exageradamente condescendente
+#### 23. Tom exageradamente condescendente
 
 **Problema:** assistentes de IA costumam elogiar quem pergunta ou concordar antes de responder.
 
@@ -372,9 +408,25 @@ Escolha um padrão de aspas para o documento inteiro e mantenha-o.
 **Depois:**
 > Os fatores econômicos que você citou são relevantes aqui.
 
+#### 24. Re-explicar o que a leitora já sabe
+
+**Sinais para observar:** resposta curta que replica o problema, percorre o diagnóstico e lista as evidências antes de chegar à decisão; query, comando ou tabela de números incluídos para provar que o plano funciona; contexto que a outra pessoa escreveu ou já aprovou; a resposta em si ficando na última linha.
+
+**Problema:** numa resposta, quem lê já tem o contexto; reconstruí-lo não acrescenta nada e enterra o ponto. Cada frase pode parecer boa isolada, então esse vício sobrevive a uma limpeza frase por frase. Comece pela decisão e mantenha só o raciocínio que mudaria a concordância de quem lê: em geral, um fato que falta e um link para agir. O diagnóstico e a prova ficam no ticket ou documento que acompanha a resposta. Aja neste padrão quando a conversa ao redor estiver visível ou quando o texto claramente é uma resposta. Na dúvida, pergunte ou não mexa.
+
+**Antes:**
+> Pois é, você tem razão, isso contorna o problema em vez de corrigir. A correção de verdade está no `MergeService`: ao mover um item para um novo pai, ele precisaria atualizar o `pipeline_id` junto com o `parent_id`. Dá para retificar os registros errados com o log de auditoria. Conferi no QA: 123 mesclagens antigas, só 6 registros errados agora, então a limpeza é pequena.
+>
+> Como o `MergeService` é código compartilhado, prefiro abrir um ticket separado a alargar este PR. O fallback aqui pode ficar até lá.
+
+**Depois:**
+> Concordo, isso é um contorno. Corrigir o `MergeService` significa mexer em código compartilhado e retificar uns poucos registros, o que alargaria este PR além do escopo.
+>
+> Prefiro abrir um ticket separado para a correção e manter o fallback aqui até lá.
+
 ### Preenchimento, ressalvas e finais
 
-#### 23. Frases de preenchimento
+#### 25. Frases de preenchimento
 
 **Antes → Depois:**
 - "a fim de atingir esse objetivo" → "para atingir esse objetivo"
@@ -384,7 +436,7 @@ Escolha um padrão de aspas para o documento inteiro e mantenha-o.
 - "o sistema tem a capacidade de processar" → "o sistema pode processar"
 - "é importante notar que os dados mostram" → "os dados mostram"
 
-#### 24. Excesso de qualificadores
+#### 26. Excesso de qualificadores
 
 **Frases vigiadas:** para ser justo, também é possível, poderia potencialmente, talvez possa se argumentar, em alguns casos pode ser que, isso é uma inferência
 
@@ -396,7 +448,7 @@ Escolha um padrão de aspas para o documento inteiro e mantenha-o.
 **Depois:**
 > A política pode afetar os resultados.
 
-#### 25. Finais genéricos e conclusões vazias
+#### 27. Finais genéricos e conclusões vazias
 
 **Problema:** texto de IA costuma terminar com otimismo vago em vez do último fato útil, ou com um parágrafo de recapitulação que só repete o que já foi dito.
 
@@ -414,7 +466,7 @@ Escolha um padrão de aspas para o documento inteiro e mantenha-o.
 
 ### Anglicismos e hifenização
 
-#### 26. Jargão em inglês hifenizado sem necessidade
+#### 28. Jargão em inglês hifenizado sem necessidade
 
 **Palavras vigiadas:** data-driven, customer-centric, cutting-edge, state-of-the-art, hands-on, mindset, insights acionáveis
 
@@ -430,7 +482,7 @@ Mantenha o termo em inglês quando ele for o nome próprio de uma tecnologia, fe
 
 ### Retórica de falsa profundidade
 
-#### 27. Fingir revelar uma verdade mais profunda
+#### 29. Fingir revelar uma verdade mais profunda
 
 **Frases vigiadas:** a questão real é, no fundo, na realidade, o que realmente importa, fundamentalmente, a questão mais profunda, o cerne da questão
 
@@ -442,7 +494,7 @@ Mantenha o termo em inglês quando ele for o nome próprio de uma tecnologia, fe
 **Depois:**
 > A questão é se os times conseguem se adaptar, o que depende de a organização estar pronta para mudar seus hábitos.
 
-#### 28. Anunciar o próximo ponto em vez de dizer o ponto
+#### 30. Anunciar o próximo ponto em vez de dizer o ponto
 
 **Frases vigiadas:** vamos explorar, vamos mergulhar, vamos entender melhor, aqui está o que você precisa saber, sem mais delongas, e se eu te dissesse que, pense nisso:, pergunta retórica seguida de resposta própria
 
@@ -460,7 +512,7 @@ Mantenha o termo em inglês quando ele for o nome próprio de uma tecnologia, fe
 **Depois:**
 > O servidor de desenvolvimento do webpack não manda o cabeçalho CORS por padrão.
 
-#### 29. Título repetido na frase seguinte
+#### 31. Título repetido na frase seguinte
 
 **Sinais para observar:** um título seguido de um parágrafo de uma linha que só repete o próprio título antes do conteúdo real começar.
 
@@ -476,9 +528,11 @@ Mantenha o termo em inglês quando ele for o nome próprio de uma tecnologia, fe
 >
 > Quando o usuário encontra uma página lenta, ele sai do site.
 
-#### 30. Escrever sobre a versão anterior
+#### 32. Escrever sobre o documento em vez do assunto
 
-**Problema:** documentação e comentários devem descrever o comportamento atual. Mencione a versão anterior só em changelogs, notas de versão, guias de migração e outros documentos sobre mudança.
+**Frases vigiadas:** foi criado para substituir, gerado a partir de, compilado a partir de, extraído de, a tabela abaixo compara, esta seção está organizada por, as seções a seguir
+
+**Problema:** o texto descreve a si mesmo em vez do assunto. O vício tem três formas: o que o texto substituiu, como foi montado ou de onde veio, e legenda, layout ou ordem que a leitora já enxerga sozinha. Mencione a versão anterior só em changelogs, notas de versão, guias de migração e outros documentos sobre mudança. Mantenha o crédito de fonte que a leitora pode seguir e corte a narrativa de como você trabalhou. Mantenha o aviso que muda o que a leitora deve fazer. Explique uma convenção só quando a leitora não puder deduzi-la, e uma vez só.
 
 **Antes:**
 > Essa função foi criada para substituir a abordagem antiga de percorrer todos os itens, que causava desempenho O(n²).
@@ -486,7 +540,13 @@ Mantenha o termo em inglês quando ele for o nome próprio de uma tecnologia, fe
 **Depois:**
 > Essa função usa uma tabela hash para buscas O(1), evitando o custo O(n²) da iteração ingênua.
 
-#### 31. Punchlines forçadas, fragmentos dramáticos e ritmo robótico
+**Antes (narrativa de método):**
+> Os números abaixo foram extraídos da tabela de preços de cada fornecedor; o que não conseguimos confirmar está marcado em vez de chutado.
+
+**Depois:**
+> Os preços são os publicados por cada fornecedor. Dois fornecedores não publicam nada; ligue para eles.
+
+#### 33. Punchlines forçadas, fragmentos dramáticos e ritmo robótico
 
 **Problema:** texto de IA costuma transformar toda frase numa frase de efeito. Uma frase curta pode reforçar um ponto. Uma fileira de fragmentos curtos geralmente soa forçada, assim como parágrafos com a mesma estrutura repetida sentença após sentença.
 
@@ -496,7 +556,7 @@ Mantenha o termo em inglês quando ele for o nome próprio de uma tecnologia, fe
 **Depois:**
 > O AlphaEvolve mudou a busca porque não favorecia simetria nem formas parecidas com as humanas, o que tornou algumas suposições antigas menos úteis.
 
-#### 32. Ditados formulaicos de falsa sabedoria
+#### 34. Ditados formulaicos de falsa sabedoria
 
 **Palavras vigiadas:** X é a linguagem de Y, X vira uma armadilha, X não é uma ferramenta, é um espelho, a moeda de, a arquitetura de
 
@@ -508,7 +568,7 @@ Mantenha o termo em inglês quando ele for o nome próprio de uma tecnologia, fe
 **Depois:**
 > Layouts simétricos costumam parecer mais previsíveis para quem usa o produto. Times podem otimizar demais o processo e perder de vista como as pessoas realmente o utilizam no dia a dia.
 
-#### 33. Aberturas de falsa sinceridade
+#### 35. Aberturas de falsa sinceridade
 
 **Frases vigiadas:** sinceramente?, olha,, a verdade é que, vou ser honesto(a), sejamos sinceros, falando sério, usadas como gancho isolado ou pausa fingida antes de um ponto comum
 
@@ -520,7 +580,7 @@ Mantenha o termo em inglês quando ele for o nome próprio de uma tecnologia, fe
 **Depois:**
 > Se vale o preço depende de quanto você vai usar.
 
-#### 34. Responder objeções que ninguém levantou
+#### 36. Responder objeções que ninguém levantou
 
 **Frases vigiadas:** isso não é (principalmente/exatamente) sobre, não estou dizendo/argumentando que, para deixar claro, não me leve a mal, isso não quer dizer que, você poderia enquadrar de outro jeito, mas, alguns diriam... mas
 
@@ -534,7 +594,7 @@ Mantenha o termo em inglês quando ele for o nome próprio de uma tecnologia, fe
 
 Remova só a defesa sem apoio. Se ela tiver uma alegação real, afirme essa alegação direto. Mantenha uma objeção quando o texto citar sua origem ou respondê-la por completo.
 
-#### 35. Rejeitar alternativas falsas
+#### 37. Rejeitar alternativas falsas
 
 **Frases vigiadas:** uma opção tentadora seria, alguém poderia ser tentado a, uma abordagem óbvia seria, você pode até pensar que... mas, seria fácil simplesmente, alguns sugeririam
 
@@ -548,9 +608,9 @@ Remova só a defesa sem apoio. Se ela tiver uma alegação real, afirme essa ale
 
 Uma alternativa rejeitada pode ser válida. Várias rejeições curtas e desconexas são um sinal mais forte. Pergunte que informação nova cada frase acrescenta. Se ela só registra uma edição anterior, reescreva o parágrafo em torno do ponto principal.
 
-#### 36. Revelações com dois-pontos
+#### 38. Revelações com dois-pontos
 
-**Problema:** texto de IA gosta de armar uma frase nominal, um dois-pontos, e uma revelação dramática em letra minúscula: "o detalhe que faz tudo funcionar: um agente separado avalia o resultado." Reescreva como frase comum. Use dois-pontos para listas, rótulos e citações, não para drama fingido.
+**Problema:** texto de IA gosta de armar uma frase nominal, um dois-pontos, e uma revelação dramática em letra minúscula: "o detalhe que faz tudo funcionar: um agente separado avalia o resultado." Reescreva como frase comum. Use dois-pontos para listas, rótulos e citações, não para drama fingido. Prefira minúscula depois de dois-pontos, salvo quando a gramática, um nome próprio, um título ou código pedirem o contrário.
 
 **Antes:**
 > O detalhe que faz tudo funcionar: um agente separado avalia o resultado.
@@ -558,9 +618,9 @@ Uma alternativa rejeitada pode ser válida. Várias rejeições curtas e descone
 **Depois:**
 > Um agente separado avalia o resultado, e é isso que faz o sistema funcionar.
 
-#### 37. Metadiscurso interpretativo
+#### 39. Metadiscurso interpretativo
 
-**Problema:** texto de IA às vezes sai do assunto para dizer à leitora o que notar, quanto peso dar a algo, ou como interpretar o próprio texto: "isso importa mais do que parece", "o ponto principal é", "como você pode ver", ou um redundante "em outras palavras". Se o ponto já está claro, apague o comentário. Caso contrário, troque por um fato ou apoio que já esteja no conteúdo.
+**Problema:** texto de IA às vezes sai do assunto para dizer à leitora o que notar, quanto peso dar a algo, ou como interpretar o próprio texto: "isso importa mais do que parece", "o ponto principal é", "como você pode ver", uma frase depois de um exemplo, cena ou número que nomeia o que ele mostrou ("isso mostra a importância de..."), ou um redundante "em outras palavras". Se o ponto já está claro, apague o comentário. Caso contrário, troque por um fato ou apoio que já esteja no conteúdo.
 
 **Antes:**
 > Isso importa mais do que parece. Como você pode ver, essa distinção é essencial. Em outras palavras, o processo ficou mais rápido.
@@ -568,9 +628,21 @@ Uma alternativa rejeitada pode ser válida. Várias rejeições curtas e descone
 **Depois:**
 > O processo ficou mais rápido.
 
-#### 38. Slop de formatação
+#### 40. Slop de formatação
 
-**Problema:** vários padrões de formatação artificial costumam aparecer juntos: emoji em título (padrão 18), negrito espalhado no meio da frase por ênfase (padrão 15), listas de marcadores onde duas frases de prosa ficariam melhores (padrão 16), e cabeçalhos para blocos de duas frases (padrão 29). A formatação deve seguir o conteúdo, não decorá-lo. Ao revisar, pergunte se cada elemento visual carrega informação ou só imita a aparência de um documento organizado.
+**Problema:** vários padrões de formatação artificial costumam aparecer juntos: emoji em título (padrão 19), negrito espalhado no meio da frase por ênfase (padrão 16), listas de marcadores onde duas frases de prosa ficariam melhores (padrão 17), e cabeçalhos para blocos de duas frases (padrão 31). A mesma família cobre setas e outros símbolos usados como decoração, linha horizontal entre todas as seções, documento que abre repetindo o próprio título, e títulos escritos para efeito em vez de nomear o que a seção contém ("a decisão, numa tela só" vira "como as seis opções se comparam"). A formatação deve seguir o conteúdo, não decorá-lo. Ao revisar, pergunte se cada elemento visual carrega informação ou só imita a aparência de um documento organizado.
+
+#### 41. Encenação de falso insight
+
+**Frases vigiadas:** o que ninguém te conta, o que a maioria erra, a parte que todo mundo pula, o segredo é, o detalhe que passa despercebido, quase ninguém percebe que
+
+**Problema:** texto de IA lisonjeia quem escreve como o especialista solitário antes de uma alegação que se sustenta sozinha. Corte a encenação e deixe a alegação carregar-se. Se a alegação for genuinamente contrária ao senso comum, a evidência ao redor deve mostrar isso, não a moldura.
+
+**Antes:**
+> O que ninguém te conta sobre contratação: a maioria das entrevistas mede confiança, não competência.
+
+**Depois:**
+> A maioria das entrevistas mede confiança, não competência.
 
 ## O que não sinalizar
 
@@ -581,10 +653,10 @@ Uma pessoa de verdade pode usar alguns destes padrões. Não trate nenhum item a
 - **Gramática impecável e estilo consistente.** Muita gente escreve profissionalmente ou já foi revisada por um editor. Polimento não é sinônimo de IA.
 - **Mistura de registro formal e informal.** Isso pode refletir a área, a idade ou os hábitos pessoais de quem escreve.
 - **Prosa "seca" ou "robótica".** Texto de IA tem sinais *específicos*. Aridez genérica sem esses sinais é só um texto seco.
-- **Palavras formais ou acadêmicas.** O padrão 7 lista palavras específicas que a IA usa em excesso. Não simplifique toda palavra formal.
+- **Palavras formais ou acadêmicas.** O padrão 8 lista palavras específicas que a IA usa em excesso. Não simplifique toda palavra formal.
 - **Saudação ou despedida de carta num comentário.** Isso é anterior ao ChatGPT em séculos.
 - **Conectivos comuns isolados.** "Além disso", "outrossim", "por conseguinte" só denunciam IA quando empilhados. Um "porém" sozinho não é sinal de nada.
-- **Aspas curvas sozinhas.** No português, aspas curvas são o padrão editorial correto, não um indício de IA (veja o padrão 19).
+- **Aspas curvas sozinhas.** No português, aspas curvas são o padrão editorial correto, não um indício de IA (veja o padrão 20).
 - **Travessão sozinho.** Muitos autores e jornalistas usam bastante. Travessão só é evidência quando combinado com o ritmo formulaico de linguagem de vendas.
 - **Uma frase curta isolada para dar ênfase.** Só marque fragmentos dramáticos quando vários aparecem em sequência.
 - **Repetição proposital de abertura.** Quem escreve pode repetir uma abertura para criar ritmo ou força, como em "Ela veio. Ela viu. Ela venceu." Mude só quando a repetição não acrescentar nada.
@@ -617,18 +689,18 @@ Estes detalhes costumam carregar a voz de quem escreveu. Preserve-os a não ser 
 
 **Modo embutido.** Quando outra tarefa usar esta skill para um *pull request*, mensagem de commit ou documento, devolva só o texto final.
 
-**Modo detectar.** Nomeie cada padrão encontrado, cite o trecho exato entre aspas, e sugira o ajuste em poucas palavras. Não reescreva o texto, não dê nota, e não afirme se foi ou não gerado por IA.
+**Modo detectar.** Um achado por linha, na ordem do texto: **Padrão N (nome):** "trecho exato" → o ajuste em poucas palavras. Não reescreva o texto, não dê nota, e não afirme se foi ou não gerado por IA.
 
 ## Processo de reescrita e autoverificação
 
-1. Leia a fonte e marque cada padrão de IA.
+1. Leia a fonte e marque cada padrão de IA. Identifique o ponto central do texto e os traços de voz a preservar: vocabulário, ritmo, franqueza, humor, incerteza, digressões. Se não conseguir identificar o ponto central, pergunte para quem pediu a edição.
 2. Escreva um rascunho. Leia em voz alta. Confira o ritmo, os detalhes, os verbos simples como *ser* e *ter*, e o nível de formalidade certo.
 3. Faça duas perguntas:
    - **"O que ainda soa como texto gerado por IA?"**
    - **"A reescrita acrescentou ou removeu algum fato, nome, número, data, citação, referência, ranking ou outra alegação?"**
    Trate qualquer acréscimo sem apoio ou alegação perdida como erro.
-4. Escreva a versão final. Afirme cada ponto com naturalidade em vez de remendar uma frase marcada de cada vez. Se uma frase continuar estranha, reescreva o parágrafo em torno do ponto principal dela. Aplique a regra de travessão do padrão 14.
-5. Confira a reescrita contra a lista de verificação em [`eval.md`](eval.md). Se algum item falhar, corrija o texto e confira de novo.
+4. Escreva a versão final. Afirme cada ponto com naturalidade em vez de remendar uma frase marcada de cada vez. Se uma frase continuar estranha, reescreva o parágrafo em torno do ponto principal dela. Aplique a regra de travessão do padrão 15.
+5. Confira a reescrita contra a lista de verificação em [`eval.md`](eval.md). Se algum item falhar, corrija o texto e confira de novo. No modo arquivo, quando o scanner embutido estiver disponível, rode `python3 scripts/slop_scan.py <caminho>` no arquivo reescrito como última checagem; uma reescrita limpa não acusa nada.
 
 Devolva o resultado no formato exigido em [Como devolver o resultado](#como-devolver-o-resultado).
 
@@ -636,7 +708,7 @@ Devolva o resultado no formato exigido em [Como devolver o resultado](#como-devo
 
 Esta skill se baseia em duas fontes em inglês, com padrões, exemplos e ressalvas adaptados para o português:
 
-- [Wikipédia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), mantida pela WikiProject AI Cleanup. Seus padrões vêm de revisões de texto gerado por IA na Wikipédia.
-- [No AI Slop](https://github.com/petergyang/no-ai-slop), de Peter Yang, que contribuiu os princípios de edição, o modo de detecção e boa parte dos padrões retóricos das seções 26 a 38.
+- [Wikipédia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), mantida pela WikiProject AI Cleanup. Seus padrões vêm de revisões de texto gerado por IA na Wikipédia, organizados em padrões numerados por versões anteriores do [Humanizer](https://github.com/blader/humanizer); a revisão v3 do Humanizer, reordenada por força, contribuiu os padrões 6 e 24 e as formas ampliadas dos padrões 32 e 40.
+- [No AI Slop](https://github.com/petergyang/no-ai-slop), de Peter Yang, que contribuiu os princípios de edição, o modo de detecção e boa parte dos padrões retóricos das seções 27 a 40.
 
 O ponto central da Wikipédia resume o problema: "LLMs usam algoritmos estatísticos para prever o que vem a seguir. O resultado tende ao mais provável estatisticamente, o que se aplica à maior variedade de casos possível." É exatamente esse nivelamento estatístico que esta skill tenta desfazer.

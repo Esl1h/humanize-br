@@ -1,0 +1,53 @@
+{
+  "skill_name": "humanize-br",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Humaniza este post de viagem: [cole evals/fixtures/sao-paulo.md]",
+      "expected_output": "O texto reescrito sem padrões de IA e com a seção O que mudou",
+      "files": ["evals/fixtures/sao-paulo.md"],
+      "assertions": [
+        "Nenhuma palavra da lista de banidas do SKILL.md aparece na reescrita",
+        "A reescrita não contém travessão em prosa expositiva",
+        "Todo fato de bairro, prato e lugar do rascunho aparece na reescrita ou é sinalizado como sem apoio",
+        "A resposta inclui uma seção curta O que mudou",
+        "Nenhum fato, nome, número ou citação foi inventado"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "Esse texto de museu tem cara de IA? Aponta os padrões sem reescrever: [cole evals/fixtures/museu.md]",
+      "expected_output": "Relatório de detecção nomeando cada padrão com trecho citado e ajuste curto",
+      "files": ["evals/fixtures/museu.md"],
+      "assertions": [
+        "Cada achado nomeia o número e o nome do padrão",
+        "Cada achado cita o trecho exato do rascunho",
+        "Cada achado sugere um ajuste curto",
+        "O relatório não reescreve o texto e não afirma autoria de IA"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Limpa essa resposta de code review para começar pela decisão: [cole evals/fixtures/resposta.md]",
+      "expected_output": "Resposta curta que começa pela decisão e mantém o ajuste",
+      "files": ["evals/fixtures/resposta.md"],
+      "assertions": [
+        "A primeira frase afirma a decisão",
+        "A reescrita não replica o diagnóstico que a outra pessoa já escreveu",
+        "Sobras de chatbot (Ótima pergunta!, Quer que eu..., Me avise!) foram removidas",
+        "Nenhum fato técnico do rascunho se perdeu"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "Aqui está uma amostra do meu jeito de escrever: [cole 2 ou 3 parágrafos seus]. Agora humaniza este texto: [cole evals/fixtures/museu.md]",
+      "expected_output": "Reescrita que segue a voz da amostra",
+      "files": ["evals/fixtures/museu.md"],
+      "assertions": [
+        "A reescrita acompanha o tamanho de frase e o vocabulário da amostra",
+        "A reescrita mantém os hábitos de pontuação da amostra, inclusive a frequência de travessão",
+        "Nenhum padrão de IA do catálogo permanece"
+      ]
+    }
+  ]
+}

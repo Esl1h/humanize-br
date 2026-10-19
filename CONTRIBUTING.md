@@ -9,6 +9,7 @@ Obrigado pelo interesse em melhorar a skill.
 
    ```bash
    python3 scripts/validate-package.py
+   python3 evals/run_evals.py
    ```
 
 3. Se você mudou algo em `SKILL.md`, atualize também a tabela correspondente em `README.md` e, se for uma mudança de comportamento, acrescente uma nota em **Histórico de versões**.

@@ -7,14 +7,14 @@ Humanize BR é uma obra derivada: traduz, mescla e adapta para o português do B
 - Repositório: [github.com/blader/humanizer](https://github.com/blader/humanizer)
 - Copyright (c) 2025 Siqi Chen
 - Licença: MIT
-- O que foi usado: a estrutura dos 35 padrões originais baseados em ["Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) da Wikipédia, o processo de reescrita, o modo de casar com a voz de quem escreve a partir de uma amostra, e as seções de falsos positivos e detalhes humanos a preservar.
+- O que foi usado: a estrutura dos 35 padrões originais baseados em ["Signs of AI writing"](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) da Wikipédia, o processo de reescrita, o modo de casar com a voz de quem escreve a partir de uma amostra, e as seções de falsos positivos e detalhes humanos a preservar. Revisões v3 posteriores do Humanizer contribuíram os padrões de conexão vaga e de leitora errada (6 e 24) e formulações incorporadas aos padrões 32 e 40.
 
 ## No AI Slop
 
 - Repositório: [github.com/petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop)
 - Copyright (c) 2026 Peter Yang
 - Licença: MIT
-- O que foi usado: o modo de detecção sem reescrita, os princípios de edição (teste da portabilidade, proteção do fato específico, e outros), a lista de palavras e frases vigiadas, e os padrões retóricos que viraram as seções 26 a 38 do `SKILL.md`.
+- O que foi usado: o modo de detecção sem reescrita, os princípios de edição (teste da portabilidade, proteção do fato específico, e outros), a lista de palavras e frases vigiadas, e os padrões retóricos que viraram as seções 27 a 40 do `SKILL.md`.
 
 ## O que é original deste repositório
 
