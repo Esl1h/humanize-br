@@ -11,6 +11,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SKILL_PATH = ROOT / "SKILL.md"
 SKILL = SKILL_PATH.read_text(encoding="utf-8")
+CATALOG_PATH = ROOT / "references" / "patterns.md"
+if not CATALOG_PATH.is_file():
+    raise SystemExit("Keep the pattern catalog in references/patterns.md")
+CATALOG = CATALOG_PATH.read_text(encoding="utf-8")
 README = (ROOT / "README.md").read_text(encoding="utf-8")
 AGENTS = (ROOT / "AGENTS.md").read_text(encoding="utf-8")
 EVAL = (ROOT / "eval.md").read_text(encoding="utf-8")
@@ -19,13 +23,13 @@ CODEX_PLUGIN = json.loads((ROOT / ".codex-plugin" / "plugin.json").read_text(enc
 
 PATTERN_COUNT = 41
 CATEGORY_HEADINGS = (
-    "### Padrões de conteúdo",
-    "### Padrões de linguagem e gramática",
-    "### Padrões visuais e de formatação",
-    "### Padrões de chatbot",
-    "### Preenchimento, ressalvas e finais",
-    "### Anglicismos e hifenização",
-    "### Retórica de falsa profundidade",
+    "## Padrões de conteúdo",
+    "## Padrões de linguagem e gramática",
+    "## Padrões visuais e de formatação",
+    "## Padrões de chatbot",
+    "## Preenchimento, ressalvas e finais",
+    "## Anglicismos e hifenização",
+    "## Retórica de falsa profundidade",
 )
 
 
@@ -90,26 +94,25 @@ if missing_plain_language_rules:
 
 pattern_numbers = [
     int(number)
-    for number in re.findall(r"(?m)^#### ([0-9]+)\. ", SKILL)
+    for number in re.findall(r"(?m)^### ([0-9]+)\. ", CATALOG)
 ]
 if pattern_numbers != list(range(1, PATTERN_COUNT + 1)):
     raise SystemExit(
-        f"Number SKILL.md patterns from 1 through {PATTERN_COUNT}: {pattern_numbers}"
+        f"Number references/patterns.md patterns from 1 through {PATTERN_COUNT}: {pattern_numbers}"
     )
 
 for category in CATEGORY_HEADINGS:
-    if SKILL.count(category) != 1:
+    if CATALOG.count(category) != 1:
         raise SystemExit(f"Keep the category heading exactly once: {category}")
 
 index_section = require_match(
     re.search(r"(?s)## Índice de padrões\n(.*?)\n## ", SKILL),
     "Keep an index of patterns section in SKILL.md",
 ).group(1)
-index_numbers = {
-    int(number)
-    for number in re.findall(r"(?<![\w.-])(\d+)(?![\w.])", index_section)
-}
-if index_numbers != set(range(1, PATTERN_COUNT + 1)):
+index_numbers = [
+    int(number) for number in re.findall(r"(?m)^([0-9]+)\. ", index_section)
+]
+if index_numbers != list(range(1, PATTERN_COUNT + 1)):
     raise SystemExit(
         f"List patterns 1 through {PATTERN_COUNT} in the SKILL.md pattern index"
     )
@@ -146,6 +149,9 @@ required_files = (
     ROOT / "scripts" / "slop_scan.py",
     ROOT / "evals" / "run_evals.py",
     ROOT / "evals" / "evals.json",
+    ROOT / "evals" / "checks.json",
+    ROOT / "evals" / "run_agent_evals.py",
+    ROOT / "tests" / "test_slop_scan.py",
 )
 for required in required_files:
     if not required.is_file():
@@ -153,7 +159,9 @@ for required in required_files:
 if not list((ROOT / "evals" / "fixtures").glob("*.md")):
     raise SystemExit("Keep at least one fixture in evals/fixtures/")
 
-if len(SKILL.splitlines()) > 900:
-    raise SystemExit("Keep SKILL.md at 900 lines or fewer")
+if "references/patterns.md" not in SKILL:
+    raise SystemExit("Point SKILL.md at references/patterns.md")
+if len(SKILL.splitlines()) > 300:
+    raise SystemExit("Keep SKILL.md at 300 lines or fewer; move detail to references/")
 
 print(f"Humanize BR package v{skill_version} is valid")

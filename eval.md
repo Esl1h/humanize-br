@@ -2,7 +2,7 @@
 
 Use esta lista depois de reescrever o texto. Responda cada item com sim ou não. Se algum item falhar, corrija o texto e confira de novo antes de devolver o resultado.
 
-Para pedidos de detecção, confira se a resposta nomeia cada padrão encontrado com o trecho exato entre aspas e um ajuste curto, sem reescrever o texto.
+Para pedidos de detecção, confira se a resposta nomeia cada padrão encontrado com o trecho exato entre aspas e um ajuste curto, termina com uma linha de resumo e não reescreve o texto.
 
 ## Princípios de edição
 
@@ -43,5 +43,5 @@ Para pedidos de detecção, confira se a resposta nomeia cada padrão encontrado
 2. Quem escreveu reconheceria o texto editado como a própria voz?
 3. O texto soaria natural se lido em voz alta para uma colega atenta?
 4. O resultado final inclui o texto editado completo e uma seção curta **O que mudou**?
-5. Para pedidos de detecção, a resposta nomeia cada padrão com o trecho exato entre aspas e um ajuste curto, sem reescrever, sem dar nota e sem afirmar autoria de IA?
-6. No modo arquivo, quando o scanner embutido estiver disponível, `scripts/slop_scan.py` não acusa nada no arquivo reescrito?
+5. Para pedidos de detecção, a resposta nomeia cada padrão com o trecho exato entre aspas e um ajuste curto, termina com uma linha de resumo de achados, padrões e onde se concentram, e evita reescrever, dar nota ou afirmar autoria de IA?
+6. No modo arquivo, quando o scanner embutido estiver disponível, `scripts/slop_scan.py` não acusa nenhum achado `fix` no arquivo reescrito, e cada achado `watch` foi corrigido ou julgado aceitável no contexto?
