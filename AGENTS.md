@@ -10,10 +10,13 @@ Mantenha a skill portátil. Não escreva instruções que a limitem a uma ou dua
 
 ## Arquivos principais
 
-- `SKILL.md` é a fonte da verdade e o único arquivo de skill do repositório. Contém metadados YAML portáveis, 41 padrões numerados, seus exemplos e o processo de reescrita.
+- `SKILL.md` é a fonte da verdade e o único arquivo de skill do repositório. Contém metadados YAML portáveis, os modos, os princípios de edição, as listas de palavras, um índice de uma linha dos 41 padrões e o processo de reescrita.
+- `references/patterns.md` é o catálogo completo de padrões: expressões vigiadas, o problema e um exemplo de antes e depois de cada padrão. A skill lê esse arquivo sob demanda.
 - `eval.md` contém a lista de autoverificação que a skill roda sobre o próprio trabalho antes de devolver o resultado.
-- `scripts/slop_scan.py` escaneia texto atrás dos padrões mecânicos (palavras banidas, travessões, títulos decorados, aspas misturadas) e lê as listas de palavras do `SKILL.md`.
-- `evals/` traz textos de prova com padrões plantados, reescritas de referência, um avaliador (`run_evals.py`) e prompts de avaliação para agentes (`evals.json`).
+- `scripts/slop_scan.py` escaneia texto atrás dos padrões que uma máquina consegue checar, como achados `fix` ou `watch`, e lê as listas de palavras do `SKILL.md` e do `references/patterns.md`.
+- `scripts/check-sync.py` confere se este repositório e o [Humanize AI Slop](https://github.com/Esl1h/humanize-ai-slop) não se distanciaram.
+- `tests/` traz os testes unitários do scanner.
+- `evals/` traz textos de prova com padrões plantados e controles negativos, reescritas de referência, os achados esperados (`checks.json`), um avaliador (`run_evals.py`), prompts de avaliação para agentes (`evals.json`) e um executor de evals com agente (`run_agent_evals.py`).
 - `README.md` explica instalação, uso, padrões e histórico de versões.
 - `.claude-plugin/plugin.json` descreve o plugin do Claude Code e aponta o carregador de skill para o `SKILL.md` na raiz.
 - `.claude-plugin/marketplace.json` permite adicionar este repositório como marketplace do Claude.
@@ -26,12 +29,15 @@ Mantenha a skill portátil. Não escreva instruções que a limitem a uma ou dua
 
 Mantenha `SKILL.md`, `eval.md` e `README.md` sincronizados.
 
-- **Padrões:** a skill tem 41 padrões numerados, organizados em sete categorias. Ao adicionar, remover ou renumerar um padrão, atualize a tabela do README, o índice de padrões no `SKILL.md`, o validador, os números de padrão relatados por `scripts/slop_scan.py` e toda referência ao número do padrão.
+- **Padrões:** a skill tem 41 padrões numerados, organizados em sete categorias. Ao adicionar, remover ou renumerar um padrão, atualize o catálogo em `references/patterns.md`, a tabela do README, o índice de padrões no `SKILL.md`, o validador, os números de padrão relatados por `scripts/slop_scan.py` e toda referência ao número do padrão.
 - **Versão:** mantenha a mesma versão em `SKILL.md`, em `metadata.version`, na primeira entrada de versão do README, em `.claude-plugin/plugin.json` e em `.codex-plugin/plugin.json`. Não acrescente um campo `version` de nível superior na skill.
 - **Compatibilidade:** mantenha as instruções de instalação e uso neutras entre agentes. Nomes como Claude Code, ChatGPT e Codex são exemplos, não limitações.
 - **Histórico:** acrescente uma nota curta de versão no README para toda mudança de comportamento ou correção não óbvia.
-- **Localização:** ao adaptar um padrão do inglês, não traduza ao pé da letra. Verifique se o fenômeno realmente ocorre em português (travessão, aspas e hifenização têm convenções diferentes do inglês) e ajuste o exemplo e a ressalva de acordo. Veja os padrões 14, 19 e 26 no `SKILL.md` como referência desse cuidado.
-- **Verificações:** antes de publicar, rode `python3 scripts/validate-package.py` e `python3 evals/run_evals.py`.
+- **Localização:** ao adaptar um padrão do inglês, não traduza ao pé da letra. Verifique se o fenômeno realmente ocorre em português (travessão, aspas e hifenização têm convenções diferentes do inglês) e ajuste o exemplo e a ressalva de acordo. Veja os padrões 14, 19 e 26 em `references/patterns.md` como referência desse cuidado.
+- **Arquivos compartilhados:** `scripts/slop_scan.py`, `scripts/check-sync.py`, `evals/run_evals.py` e `evals/run_agent_evals.py` são idênticos no Humanize AI Slop. Mantenha o comportamento específico de idioma no `CONFIG` do scanner e no `evals/checks.json`, e copie qualquer mudança para os dois repositórios.
+- **Paridade:** uma mudança estrutural aqui (uma seção, um passo numerado, um item de lista no SKILL.md ou no eval.md, um prompt de avaliação) pede a mesma mudança no Humanize AI Slop. O `scripts/check-sync.py` acusa a divergência.
+- **Tamanho:** mantenha o SKILL.md curto. Detalhe de que a skill não precisa em toda execução vai para `references/`.
+- **Verificações:** antes de publicar, rode `python3 scripts/validate-package.py`, `python3 evals/run_evals.py`, `python3 -m unittest discover -s tests` e `python3 scripts/check-sync.py`.
 
 ## Estilo de escrita
 

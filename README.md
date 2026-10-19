@@ -96,30 +96,43 @@ https://github.com/Esl1h/humanize-br
 
 **No Claude Desktop**, baixe este repositório como ZIP e envie como skill.
 
-**Instalação manual:** copie `SKILL.md` e `eval.md` para a pasta de skills do seu agente, e `scripts/` se quiser o scanner mecânico.
+**Instalação manual:** copie `SKILL.md`, `eval.md` e `references/` para a pasta de skills do seu agente, e `scripts/` se quiser o scanner mecânico.
 
 ## O scanner mecânico
 
-O repo traz `scripts/slop_scan.py`, um scanner sem dependências para as checagens que uma máquina faz bem: palavras banidas, travessões, títulos decorados, aspas misturadas e listas com rótulo em negrito. Ele lê as listas de palavras do `SKILL.md`, então nunca dessincroniza da skill. Os padrões retóricos continuam com o modelo.
+O repo traz `scripts/slop_scan.py`, um scanner sem dependências para as checagens que uma máquina faz bem. Ele separa os achados em duas severidades:
+
+- `fix`: palavras banidas (com conjugações e flexões), travessões, listas com rótulo em negrito, títulos em *title case*, emojis em títulos e itens de lista, aspas misturadas e anglicismos hifenizados. A skill sempre remove esses.
+- `watch`: contrastes binários, emojis no corpo do texto, linhas horizontais e as expressões vigiadas do catálogo (sobras de chatbot, falso insight, preenchimento, fontes vagas e outras). Costumam ser slop, mas pedem uma olhada no contexto.
+
+Ele lê as listas de palavras do `SKILL.md` e do `references/patterns.md`, então nunca dessincroniza da skill. Ignora código, metadados YAML, destinos de links, URLs, texto entre aspas e travessão de diálogo. Os padrões retóricos continuam com o modelo. O mesmo scanner vem no [Humanize AI Slop](https://github.com/Esl1h/humanize-ai-slop) e escolhe o idioma pelo `SKILL.md`.
 
 ```bash
 python3 scripts/slop_scan.py docs/post-lancamento.md   # lista achados com o número do padrão
 python3 scripts/slop_scan.py - < rascunho.txt          # lê da entrada padrão
-python3 scripts/slop_scan.py limpo.md --strict         # sai com código 1 se achar algo
+python3 scripts/slop_scan.py rascunho.md --json        # achados em JSON
+python3 scripts/slop_scan.py limpo.md --strict         # sai com código 1 se achar algo de nível fix
 ```
 
 A skill roda o scanner no modo detectar e depois de edições em arquivo sempre que instalada junto com o repo.
 
 ## Testes
 
-`evals/` traz textos de prova com padrões plantados, reescritas de referência e um avaliador:
+`evals/` traz textos de prova com padrões plantados, controles negativos de prosa humana, reescritas de referência e um avaliador. O `evals/checks.json` define o que cada texto de prova deve produzir. `tests/` traz os testes unitários do scanner:
 
 ```bash
 python3 evals/run_evals.py                                          # autoverificações (CI)
 python3 evals/run_evals.py --grade evals/fixtures/sao-paulo.md saida.md
+python3 -m unittest discover -s tests                               # testes do scanner (CI)
 ```
 
-`evals/evals.json` lista prompts e asserções para rodar a skill completa com um agente. O CI roda as autoverificações a cada push.
+`evals/evals.json` lista prompts e asserções para rodar a skill completa com um agente. O `evals/run_agent_evals.py` roda esses prompts em qualquer CLI de agente que leia o prompt da entrada padrão, avalia as edições mecanicamente e, com `--judge`, pede a um segundo comando que confira cada asserção:
+
+```bash
+python3 evals/run_agent_evals.py --agent "claude -p" --judge "claude -p"
+```
+
+O CI roda as autoverificações e os testes a cada push, e confere se os arquivos compartilhados continuam iguais aos do Humanize AI Slop.
 
 ## Os 41 padrões
 
@@ -199,7 +212,7 @@ python3 evals/run_evals.py --grade evals/fixtures/sao-paulo.md saida.md
 | 40 | **Slop de formatação** | emoji em título, negrito decorativo, bullets e headers minúsculos | Formatação deve seguir o conteúdo |
 | 41 | **Encenação de falso insight** | "o que ninguém te conta sobre contratação:" | Corte a encenação, deixe a alegação |
 
-Cada padrão tem exemplo completo, ressalva e explicação em [`SKILL.md`](SKILL.md). A lista de autoverificação que a skill roda sobre o próprio trabalho está em [`eval.md`](eval.md).
+Cada padrão tem exemplo completo, ressalva e explicação em [`references/patterns.md`](references/patterns.md). O [`SKILL.md`](SKILL.md) guarda um resumo de uma linha de cada um, e a skill só carrega o catálogo completo quando precisa. A lista de autoverificação que a skill roda sobre o próprio trabalho está em [`eval.md`](eval.md).
 
 ## Exemplo completo
 
