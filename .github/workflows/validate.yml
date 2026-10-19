@@ -18,3 +18,11 @@ jobs:
         run: python3 scripts/validate-package.py
       - name: Run eval self-checks
         run: python3 evals/run_evals.py
+      - name: Run scanner unit tests
+        run: python3 -m unittest discover -s tests
+      - uses: actions/checkout@v4
+        with:
+          repository: Esl1h/humanize-ai-slop
+          path: .sibling/humanize-ai-slop
+      - name: Check sync with humanize-ai-slop
+        run: python3 scripts/check-sync.py .sibling/humanize-ai-slop
