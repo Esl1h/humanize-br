@@ -1,6 +1,6 @@
 {
   "name": "humanize-br",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Remove o sotaque de robô do texto em português, sem achatar a voz de quem escreveu.",
   "author": {
     "name": "Esl1h",

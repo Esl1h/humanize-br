@@ -11,7 +11,7 @@ description: |
   humanize-ai-slop.
 license: MIT
 metadata:
-  version: "1.1.0"
+  version: "1.2.0"
 ---
 
 # Humanize BR: elimine o sotaque de robô do seu texto
