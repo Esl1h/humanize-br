@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Self-checks for the scanner, the grader, and the packaged fixtures.
 
-Run without arguments in CI. Use --grade to check a rewrite produced by
-the skill or by an agent run:
+Run without arguments in CI. The expected findings for each fixture and
+the facts each golden rewrite must keep live in evals/checks.json, so this
+file is the same in Humanize AI Slop and Humanize BR. Use --grade to check
+a rewrite produced by the skill or by an agent run:
 
-    python3 evals/run_evals.py --grade evals/fixtures/sao-paulo.md out.md
+    python3 evals/run_evals.py --grade evals/fixtures/INPUT.md out.md
 """
 from __future__ import annotations
 
@@ -21,38 +23,7 @@ import slop_scan  # noqa: E402
 
 FIXTURES = ROOT / "fixtures"
 GOLDEN = ROOT / "golden"
-
-# Minimum scanner findings each fixture must produce, by kind. A value of
-# None marks a negative control: a text the scanner must not flag.
-FIXTURE_MINIMUMS = {
-    "sao-paulo.md": {"banned": 1, "dash": 1, "bold_label": 3},
-    "museu.md": {
-        "banned": 2,
-        "dash": 1,
-        "title_case": 1,
-        "mixed_quotes": 1,
-        "anglicism": 1,
-    },
-    "resposta.md": None,
-}
-
-GOLDEN_CHECKS = {
-    "sao-paulo-after.md": {
-        "input": "sao-paulo.md",
-        "summary_heading": "O que mudou",
-        "keep": [
-            "São Paulo",
-            "Liberdade",
-            "Mooca",
-            "Bixiga",
-            "Mercadão",
-            "Vila Madalena",
-            "mortadela",
-            "kaiseki",
-            "pastel",
-        ],
-    },
-}
+CHECKS = json.loads((ROOT / "checks.json").read_text(encoding="utf-8"))
 
 
 def scan(path: Path) -> list[slop_scan.Finding]:
@@ -66,24 +37,37 @@ def count_kinds(findings: list[slop_scan.Finding]) -> dict[str, int]:
     return counts
 
 
+def normalize_number(token: str) -> str:
+    """Drop thousands separators but keep decimals, so 1.5 and 15 differ.
+
+    A separator followed by exactly three digits is a thousands separator
+    in both English (1,000) and Portuguese (1.000); any other separator is
+    a decimal mark.
+    """
+    parts = re.split(r"[.,]", token)
+    head, rest = parts[0], parts[1:]
+    while rest and len(rest[0]) == 3:
+        head += rest.pop(0)
+    return head + ("." + "".join(rest) if rest else "")
+
+
 def numbers(text: str) -> set[str]:
-    return {
-        n.replace(",", "").replace(".", "")
-        for n in re.findall(r"\d+(?:[.,]\d+)*", text)
-    }
+    return {normalize_number(n) for n in re.findall(r"\d+(?:[.,]\d+)*", text)}
+
+
+def indent(text: str) -> str:
+    return "  " + text.replace("\n", "\n  ")
 
 
 def grade(
     input_text: str, output_text: str, keep: list[str] | None = None
 ) -> list[str]:
-    """Check a rewrite: mechanically clean and fact preserving."""
+    """Check a rewrite: free of fix findings and fact preserving."""
     problems: list[str] = []
-    findings = slop_scan.scan_text(output_text)
-    if findings:
-        problems.append("scanner findings in the rewrite:")
-        problems.extend(
-            "  " + line for line in slop_scan.format_findings(findings).splitlines()
-        )
+    fix_findings = slop_scan.fixes(slop_scan.scan_text(output_text))
+    if fix_findings:
+        problems.append("scanner fix findings in the rewrite:")
+        problems.append(indent(slop_scan.format_findings(fix_findings)))
     missing = numbers(input_text) - numbers(output_text)
     if missing:
         problems.append(
@@ -95,55 +79,63 @@ def grade(
     return problems
 
 
-def run_checks() -> int:
+def check_fixture(name: str, spec: dict) -> int:
+    findings = scan(FIXTURES / name)
+    failures = 0
+    if spec.get("control"):
+        fix_findings = slop_scan.fixes(findings)
+        watch_count = len(findings) - len(fix_findings)
+        if fix_findings:
+            failures += 1
+            print(f"FAIL {name}: scanner flagged a clean control text")
+            print(indent(slop_scan.format_findings(fix_findings)))
+        else:
+            print(f"pass {name}: negative control has no fix findings")
+        max_watch = spec.get("max_watch")
+        if max_watch is not None and watch_count > max_watch:
+            failures += 1
+            print(f"FAIL {name}: expected <= {max_watch} watch findings, got {watch_count}")
+            print(indent(slop_scan.format_findings(findings)))
+    counts = count_kinds(findings)
+    for kind, wanted in spec.get("min", {}).items():
+        got = counts.get(kind, 0)
+        if got < wanted:
+            failures += 1
+            print(f"FAIL {name}: expected >= {wanted} {kind}, got {got}")
+        else:
+            print(f"pass {name}: {kind} x{got} (>= {wanted})")
+    return failures
+
+
+def check_golden(name: str, spec: dict) -> int:
+    text = (GOLDEN / name).read_text(encoding="utf-8")
     failures = 0
 
-    for name, minimums in FIXTURE_MINIMUMS.items():
-        path = FIXTURES / name
-        findings = scan(path)
-        if minimums is None:
-            if findings:
-                failures += 1
-                print(f"FAIL {name}: scanner flagged a clean control text")
-                print("  " + slop_scan.format_findings(findings).replace("\n", "\n  "))
-            else:
-                print(f"pass {name}: negative control clean")
-            continue
-        counts = count_kinds(findings)
-        for kind, wanted in minimums.items():
-            got = counts.get(kind, 0)
-            if got < wanted:
-                failures += 1
-                print(f"FAIL {name}: expected >= {wanted} {kind}, got {got}")
-            else:
-                print(f"pass {name}: {kind} x{got} (>= {wanted})")
+    heading = spec["summary_heading"]
+    if heading.lower() not in text.lower():
+        failures += 1
+        print(f'FAIL {name}: missing "{heading}" section')
+    else:
+        print(f'pass {name}: has a "{heading}" section')
 
-    for name, spec in GOLDEN_CHECKS.items():
-        text = (GOLDEN / name).read_text(encoding="utf-8")
-        findings = slop_scan.scan_text(text)
-        if findings:
-            failures += 1
-            print(f"FAIL {name}: golden rewrite is not clean")
-            print("  " + slop_scan.format_findings(findings).replace("\n", "\n  "))
-        else:
-            print(f"pass {name}: clean under the scanner")
+    source = (FIXTURES / spec["input"]).read_text(encoding="utf-8")
+    problems = grade(source, text, spec["keep"])
+    if problems:
+        failures += 1
+        print(f"FAIL {name}: grader problems")
+        for problem in problems:
+            print(f"  {problem}")
+    else:
+        print(f"pass {name}: grader (facts preserved, no fix findings)")
+    return failures
 
-        heading = spec["summary_heading"]
-        if heading.lower() not in text.lower():
-            failures += 1
-            print(f'FAIL {name}: missing "{heading}" section')
-        else:
-            print(f'pass {name}: has a "{heading}" section')
 
-        source = (FIXTURES / spec["input"]).read_text(encoding="utf-8")
-        problems = grade(source, text, spec["keep"])
-        if problems:
-            failures += 1
-            print(f"FAIL {name}: grader problems")
-            for problem in problems:
-                print(f"  {problem}")
-        else:
-            print(f"pass {name}: grader (facts preserved, mechanically clean)")
+def run_checks() -> int:
+    failures = 0
+    for name, spec in CHECKS["fixtures"].items():
+        failures += check_fixture(name, spec)
+    for name, spec in CHECKS["golden"].items():
+        failures += check_golden(name, spec)
 
     evals = json.loads((ROOT / "evals.json").read_text(encoding="utf-8"))
     if len(evals.get("evals", [])) < 3:
@@ -151,6 +143,11 @@ def run_checks() -> int:
         print("FAIL evals.json: fewer than 3 eval prompts")
     else:
         print(f"pass evals.json: {len(evals['evals'])} eval prompts")
+    for item in evals.get("evals", []):
+        for file in item.get("files", []):
+            if not (REPO / file).is_file():
+                failures += 1
+                print(f"FAIL evals.json: eval {item['id']} names a missing file: {file}")
 
     if failures:
         print(f"{failures} check(s) failed")
@@ -181,7 +178,7 @@ def main() -> int:
             for problem in problems:
                 print(f"  {problem}")
             return 1
-        print("rewrite passes: mechanically clean, facts preserved")
+        print("rewrite passes: no fix findings, facts preserved")
         return 0
 
     return run_checks()

@@ -1,0 +1,15 @@
+{
+  "fixtures": {
+    "sao-paulo.md": {"min": {"banned": 2, "dash": 1, "bold_label": 3, "contrast": 2}},
+    "museu.md": {"min": {"banned": 2, "dash": 1, "title_case": 1, "mixed_quotes": 1, "anglicism": 1, "phrase": 1}},
+    "resposta.md": {"control": true, "min": {"phrase": 1}},
+    "controle-cronica.md": {"control": true, "max_watch": 0}
+  },
+  "golden": {
+    "sao-paulo-after.md": {
+      "input": "sao-paulo.md",
+      "summary_heading": "O que mudou",
+      "keep": ["São Paulo", "Liberdade", "Mooca", "Bixiga", "Mercadão", "Vila Madalena", "mortadela", "kaiseki", "pastel"]
+    }
+  }
+}
